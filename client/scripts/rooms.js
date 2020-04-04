@@ -1,14 +1,40 @@
 var Rooms = {
+  uniqueRooms: {},
 
   // create html tag for the html select tag and appended to the DOM
-  addRoom: function() {
-    let userInputRoom = prompt('Enter room name: ');
+  addRoom: function(room, cb = function() { return; }) {
+    // add the new room
+    this.uniqueRooms[room] = room;
 
-    // retreive the user input
-    let html = `<option data-room=${userInputRoom}>${userInputRoom}</option>`;
+    console.log('add new room => ', this.uniqueRooms)
 
-    // append as selection option
-    $('select').append(html);
+    // return all the new rooms
+    cb(Object.keys(this.uniqueRooms))
+  },
+
+  // update the room if there are data from the -- app.js
+  update: function(db, cb = function() { return; }) {
+    let dataSize = Object.keys(Rooms.uniqueRooms).length;
+
+    // filter all the unique rooms, loop through the data from API call
+    for(let key of db) {
+      // if room name is not equal to null, undefined or empty string
+      if(key.roomname !== null && key.roomname !== undefined && key.roomname !== '') {
+        // console.log('room name => ', key.roomname)
+
+        // check if it is already exist in the unique rooms object
+        if(!this.uniqueRooms[key.roomname]) {
+          // if it is not in there, store it there
+          let newRoomName = key.roomname[0].toUpperCase() + key.roomname.slice(1).toLowerCase();
+          this.uniqueRooms[newRoomName] = newRoomName;
+        }
+      }
+    }
+
+    console.log(this.uniqueRooms)
+
+    // return all the unique rooms
+    cb(Object.keys(this.uniqueRooms))
   },
 
   // may need to add an event listner onto the room name itself
@@ -16,7 +42,7 @@ var Rooms = {
 };
 
 // add event listener on the "Add Room"
-$('button').on('click', function() {
+// $('button').on('click', function() {
   // invoke the addRoom method
-   Rooms.addRoom();
-});
+//    Rooms.addRoom();
+// });
