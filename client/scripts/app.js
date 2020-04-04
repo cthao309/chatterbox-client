@@ -16,7 +16,7 @@ var App = {
     App.fetch(App.stopSpinner);
 
     // retreive the data every 5 second
-    // setInterval(App.fetch, 10000);
+    // setInterval(App.fetch, 1000);
 
   },
 
@@ -34,7 +34,7 @@ var App = {
       Rooms.update(data.results, RoomsView.render);
 
       // if there are data, update the message board
-      // Messages.update(data.results, MessagesView.render);
+      Messages.update(data.results, MessagesView.render);
 
       callback();
     });

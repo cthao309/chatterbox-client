@@ -5,40 +5,24 @@ var RoomsView = {
 
 
   initialize: function() {
-    // let roomContainer = {};
-
-    // Parse.readAll((data) => {
-      // examine the response from the server request:
-      // console.log(data.results);
-
-      // roomContainer = _.uniq(data.results, function(el) {
-      //   if(el.roomname !== null || el.roomname !== undefined) {
-      //     console.log('hello => ', el.roomname)
-      //     return el.roomname;
-      //   }
-      // });
-
-      // for(let key of data.results) {
-      //   if(key.roomname !== null && key.roomname !== undefined && key.roomname !== '') {
-      //     console.log('room name => ', key.roomname)
-      //     if(!this.roomContainer[key.roomname]) {
-      //       this.roomContainer[key.roomname] = key.roomname;
-      //     }
-      //   }
-      // }
-
-      // console.log('unique rooms => ', Object.values(roomContainer))
-    // });
 
     // add event listener on when the user switch room
-    RoomsView.$select.on('change', function() {
-      // invoke handleChange
-      RoomsView.handleChange();
-    });
+    RoomsView.$select.on('change', this.handleChange);
 
     // add event listener on when a clicked on the "Add Room" btn
     RoomsView.$button.on('click', this.handleClick);
 
+  },
+
+  handleChange: function() {
+    // grab the option it is selected
+    let userOption = $('select').val();
+
+    // console.log('selected option => ', userOption);
+
+    // render message view
+    messageView.render();
+    return userOption;
   },
 
   // method to handle click on "Add Room"
@@ -64,10 +48,10 @@ var RoomsView = {
   // render data
   render: function(roomArray) {
 
-    console.log('room => ', roomArray);
+    // console.log('room => ', roomArray);
 
     // remove all the existing option in the selection list
-    $('option').remove()
+    $('option').remove();
 
     // declare string template
     let html = ``;

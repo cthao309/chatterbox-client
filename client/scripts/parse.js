@@ -2,7 +2,7 @@ var Parse = {
 
   server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
 
-  create: function(message, successCB, errorCB = null) {
+  create: function(message, successCB, d = null) {
     // todo: save a message to the server
     $.ajax({
       url: Parse.server,
@@ -10,7 +10,7 @@ var Parse = {
       data: JSON.stringify(message),
       contentType: 'application/json',
       success: successCB,
-      error: errorCB || function(error) {
+      error: function(error) {
         console.error('Chatterbox: Failed to create message', error)
       }
     });

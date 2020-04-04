@@ -6,7 +6,7 @@ var Rooms = {
     // add the new room
     this.uniqueRooms[room] = room;
 
-    console.log('add new room => ', this.uniqueRooms)
+    // console.log('add new room => ', this.uniqueRooms)
 
     // return all the new rooms
     cb(Object.keys(this.uniqueRooms))
@@ -24,25 +24,26 @@ var Rooms = {
 
         // check if it is already exist in the unique rooms object
         if(!this.uniqueRooms[key.roomname]) {
-          // if it is not in there, store it there
+          // reformat the room naming
+          // console.log('testing for xss => ', key.roomname)
+          // console.log('testing for xss => ', key.roomname.replace(/[<>]/g, '$'))
           let newRoomName = key.roomname[0].toUpperCase() + key.roomname.slice(1).toLowerCase();
-          this.uniqueRooms[newRoomName] = newRoomName;
+
+          if(newRoomName.length < 15) {
+            // if it is not in there, store it there
+            this.uniqueRooms[newRoomName] = newRoomName;
+          }
         }
       }
     }
 
-    console.log('new room set => ', this.uniqueRooms)
+    // lobby
+    // Lobby
+
+    // console.log('new room set => ', this.uniqueRooms)
 
     // return all the unique rooms
     cb(Object.keys(this.uniqueRooms))
   },
 
-  // may need to add an event listner onto the room name itself
-
 };
-
-// add event listener on the "Add Room"
-// $('button').on('click', function() {
-  // invoke the addRoom method
-//    Rooms.addRoom();
-// });
