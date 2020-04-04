@@ -51,7 +51,7 @@ var RoomsView = {
       // if there are data, update the message board
       console.log('filter message => ', RoomsView.filteredMessage);
 
-      Messages.update(RoomsView.filteredMessage, MessagesView.render);
+      MessagesView.render(RoomsView.filteredMessage);
       // render message view
 
       // return RoomsView.filteredMessage;

@@ -2,41 +2,6 @@ var MessagesView = {
 
   $chats: $('#chats'),
   $submitMessageBtn: $('.submit'),
-  dummyData: [
-    {
-      objectId: "bsIwl7jqaS",
-      username: "philip",
-      roomname: "",
-      text: "asdf",
-      createdAt: "2020-04-04T18:47:45.909Z",
-      updatedAt: "2020-04-04T18:47:45.909Z"
-    },
-    {
-      objectId: "bsIwl7jqaS",
-      username: "charlie",
-      roomname: "",
-      text: "asdf",
-      createdAt: "2020-04-04T18:47:45.909Z",
-      updatedAt: "2020-04-04T18:47:45.909Z"
-    },
-    {
-      objectId: "bsIwl7jqaS",
-      username: "nate",
-      roomname: "",
-      text: "asdf",
-      createdAt: "2020-04-04T18:47:45.909Z",
-      updatedAt: "2020-04-04T18:47:45.909Z"
-    },
-    {
-      objectId: "bsIwl7jqaS",
-      username: "will",
-      roomname: "",
-      text: "asdf",
-      createdAt: "2020-04-04T18:47:45.909Z",
-      updatedAt: "2020-04-04T18:47:45.909Z"
-    },
-  ],
-
 
   initialize: () => {
     // MessagesView.$chats.on('click', '.username', this.handleClick);
@@ -63,15 +28,25 @@ var MessagesView = {
   },
 
   render: function(messageDB) {
-    console.log('chat => ', MessagesView.dummyData);
+    console.log('chat => ', messageDB);
 
-    let html = '';
+    // remove the existing messages
+    MessagesView.$chats.empty();
 
-    for ( let i = 0; i < MessagesView.dummyData.length; i++) {
-      html += MessagesView.render(MessagesView.dummyData[i])
+    let html = ``;
+
+    for ( let i = 0; i < messageDB.length; i++) {
+      html += `<div class="chat">
+      <div class="username">
+        ${messageDB[i].username}
+        </div>
+        <div class="message">
+        ${messageDB[i].text}
+      </div>
+    </div>`
     }
 
-    MessagesView.$chat.append(html)
+    MessagesView.$chats.append(html)
 
   },
 
