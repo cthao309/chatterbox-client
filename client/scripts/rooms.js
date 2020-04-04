@@ -1,7 +1,6 @@
 var Rooms = {
 
-  // add event listener on the "add room" button
-  // if it is clicked, prompt an alert message to input room name
+  // create html tag for the html select tag and appended to the DOM
   addRoom: function() {
     let userInputRoom = prompt('Enter room name: ');
 
@@ -16,6 +15,8 @@ var Rooms = {
 
 };
 
+// add event listener on the "Add Room"
 $('button').on('click', function() {
+  // invoke the addRoom method
    Rooms.addRoom();
 });

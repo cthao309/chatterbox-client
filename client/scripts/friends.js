@@ -42,7 +42,7 @@ userName = {
 // }
 
 // ensure that we have the correct room data
-$('.userName').on('click', function() {
+// $('.userName').on('click', function() {
 
   // invoke the  Friend
 
@@ -59,6 +59,6 @@ $('.userName').on('click', function() {
 
   // // access the database
 
-})
+// })
 
-console.log('userName => ', window.location.search)
+// console.log('userName => ', window.location.search)
