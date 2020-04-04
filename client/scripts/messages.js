@@ -22,8 +22,10 @@ var Messages = {
     // check there has been a change in the data
     // if(messages.length !== dataLength) {
     //   // pass the new data message set to the callback
-      cb(Object.keys(Messages.messagesData));
+
+      // console.log('logging from messages.js => ', messages)
+      cb(messages);
     // }
-  }
+  },
 
 }

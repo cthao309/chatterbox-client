@@ -24,14 +24,10 @@ var Rooms = {
 
         // check if it is already exist in the unique rooms object
         if(!this.uniqueRooms[key.roomname]) {
-          // reformat the room naming
-          // console.log('testing for xss => ', key.roomname)
-          // console.log('testing for xss => ', key.roomname.replace(/[<>]/g, '$'))
-          let newRoomName = key.roomname[0].toUpperCase() + key.roomname.slice(1).toLowerCase();
-
-          if(newRoomName.length < 15) {
+          // prevent xss attack by limiting the
+          if(key.roomname.length < 15) {
             // if it is not in there, store it there
-            this.uniqueRooms[newRoomName] = newRoomName;
+            this.uniqueRooms[key.roomname] = key.roomname;
           }
         }
       }

@@ -34,7 +34,9 @@ var App = {
       Rooms.update(data.results, RoomsView.render);
 
       // if there are data, update the message board
-      Messages.update(data.results, MessagesView.render);
+      RoomsView.handleChange();
+      // console.log('app.js default data => ', defaultData)
+      // Messages.update(defaultData, MessagesView.render);
 
       callback();
     });

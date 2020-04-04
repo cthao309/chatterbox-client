@@ -2,6 +2,7 @@ var RoomsView = {
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
+  filteredMessage: [],
 
 
   initialize: function() {
@@ -17,12 +18,46 @@ var RoomsView = {
   handleChange: function() {
     // grab the option it is selected
     let userOption = $('select').val();
-
     // console.log('selected option => ', userOption);
 
-    // render message view
-    messageView.render();
-    return userOption;
+    // reset filteredMessage after user change selection option
+    RoomsView.filteredMessage = [];
+
+    // retreive the new data set associate to the user selected room
+    Parse.readAll((data) => {
+      // examine the response from the server request:
+      console.log('handle change roomsView.js =>', data);
+
+      // base case: if no data, exist
+      if(!data.results || !data.results.length) {
+        return;
+      }
+
+      /*
+        {
+          username: 'shawndrost',
+          text: 'trololo',
+          roomname: '4chan'
+        }
+      */
+      // perform filter to retreive the user selected room
+       for (let key of data.results) {
+         // check if each message has a roomname match with user selected room name
+         if(key['roomname'] === userOption) {
+           RoomsView.filteredMessage.push(key);
+         }
+       }
+
+      // if there are data, update the message board
+      console.log('filter message => ', RoomsView.filteredMessage);
+
+      Messages.update(RoomsView.filteredMessage, MessagesView.render);
+      // render message view
+
+      // return RoomsView.filteredMessage;
+    });
+
+
   },
 
   // method to handle click on "Add Room"
