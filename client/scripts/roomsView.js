@@ -66,6 +66,10 @@ var RoomsView = {
 
     console.log('room => ', roomArray);
 
+    // remove all the existing option in the selection list
+    $('option').remove()
+
+    // declare string template
     let html = ``;
 
     // loop through the array of room and generate the template

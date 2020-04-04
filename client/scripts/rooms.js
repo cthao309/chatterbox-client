@@ -31,7 +31,7 @@ var Rooms = {
       }
     }
 
-    console.log(this.uniqueRooms)
+    console.log('new room set => ', this.uniqueRooms)
 
     // return all the unique rooms
     cb(Object.keys(this.uniqueRooms))
