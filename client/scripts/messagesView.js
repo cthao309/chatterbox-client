@@ -25,6 +25,28 @@ var MessagesView = {
 
     console.log('created message => ', userMessageObj)
 
+    // invoke roomView.handleChange method to render the current active room
+    RoomsView.handleChange();
+
+  },
+
+  // method to generate the html tags to be render onto the page
+  generateTemplate: function(messageData) {
+    let html = ``;
+
+    for ( let i = 0; i < messageData.length; i++) {
+      html +=
+      `<div class="chat">
+        <div class="username">
+          ${messageData[i].username}
+        </div>
+        <div class="message">
+          ${messageData[i].text}
+        </div>
+      </div>`
+    }
+
+    return html;
   },
 
   render: function(messageDB) {
@@ -33,20 +55,9 @@ var MessagesView = {
     // remove the existing messages
     MessagesView.$chats.empty();
 
-    let html = ``;
+    let htmlTemplate = MessagesView.generateTemplate(messageDB);
 
-    for ( let i = 0; i < messageDB.length; i++) {
-      html += `<div class="chat">
-      <div class="username">
-        ${messageDB[i].username}
-        </div>
-        <div class="message">
-        ${messageDB[i].text}
-      </div>
-    </div>`
-    }
-
-    MessagesView.$chats.append(html)
+    MessagesView.$chats.append(htmlTemplate)
 
   },
 
