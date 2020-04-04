@@ -11,20 +11,10 @@ var MessagesView = {
 
   // method to add messages to the DOM
   renderMessage: () => {
-    let testMessage =
-      `
-        <h1>
-          Hello Charlie, how are you...
-        </h1>
-      `;
+    // MessagesView.render()
 
-    messageView.render()
-
-    MessagesView.$chats.append()
+    // MessagesView.$chats
   },
-
-
-
 
 
 };
