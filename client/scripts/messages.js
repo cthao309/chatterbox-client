@@ -16,16 +16,7 @@ var Messages = {
 
   // update the view messages
   update: function(messages, cb = function() { return; }) {
-    // grab the data size
-    // let dataLength = Object.keys(Messages.messageData).length;
-
-    // check there has been a change in the data
-    // if(messages.length !== dataLength) {
-    //   // pass the new data message set to the callback
-
-      // console.log('logging from messages.js => ', messages)
-      cb(messages);
-    // }
+    cb(messages);
   },
 
 }

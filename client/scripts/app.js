@@ -16,7 +16,7 @@ var App = {
     App.fetch(App.stopSpinner);
 
     // retreive the data every 5 second
-    // setInterval(App.fetch, 1000);
+    setInterval(App.fetch, 5000);
 
   },
 
@@ -35,8 +35,6 @@ var App = {
 
       // if there are data, update the message board
       RoomsView.handleChange();
-      // console.log('app.js default data => ', defaultData)
-      // Messages.update(defaultData, MessagesView.render);
 
       callback();
     });

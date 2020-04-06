@@ -4,7 +4,14 @@ var MessagesView = {
   $submitMessageBtn: $('.submit'),
 
   initialize: () => {
-    // MessagesView.$chats.on('click', '.username', this.handleClick);
+    // add event listener on the click to add friend
+    MessagesView.$chats.on('click', '.username', function() {
+      // retreive the user selected friend name
+      let selectedFriend = $(this)[0].innerText;
+
+      // invoke the click handler function
+      MessagesView.handleClick(selectedFriend);
+    });
   },
 
   // invoke when user clicked on the submit message
@@ -23,8 +30,6 @@ var MessagesView = {
 
     Messages.addMessage(userMessageObj, function() { console.log('Successfully created message')});
 
-    console.log('created message => ', userMessageObj)
-
     // invoke roomView.handleChange method to render the current active room
     RoomsView.handleChange();
 
@@ -34,11 +39,19 @@ var MessagesView = {
   generateTemplate: function(messageData) {
     let html = ``;
 
+    let friend;
+
     for ( let i = 0; i < messageData.length; i++) {
+      if(messageData[i].friend && Array.isArray(messageData[i].friend)) {
+        friend = messageData[i].friend.indexOf(window.location.search) >= 0 ? 'friend' : '';
+      }
       html +=
       `<div class="chat">
-        <div class="username">
-          ${messageData[i].username}
+        <div class="heading ${friend}">
+          <div class="username ${friend}">
+            ${messageData[i].username}
+          </div>
+          <span class="${friend}">${friend}</span>
         </div>
         <div class="message">
           ${messageData[i].text}
@@ -61,11 +74,9 @@ var MessagesView = {
 
   },
 
-  handleClick: function() {
+  handleClick: function(friendName) {
     // declare a storage container based on the selected room
-    let selectedRoomMessages = Rooms.handleChange();
-
-    // console.log('selected room => ', selectedRoomMessages)
+    Friends.addFriends(friendName);
   },
 
 };
